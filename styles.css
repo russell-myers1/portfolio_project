@@ -79,7 +79,7 @@ nav ul li a.active {
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-image: url('images/black.jpg');
-  height: 50vh;
+  height: 40vh;
   width: 80vh;
 }
 

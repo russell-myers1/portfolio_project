@@ -24,11 +24,11 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-
+/*
 document.addEventListener("DOMContentLoaded", () => {
   const scrollingContainer = document.querySelector(".scrolling-container");
   const scrollingWrapper = document.querySelector(".scrolling-wrapper");
-  
+//
   scrollingContainer.addEventListener("scroll", () => {
     const scrollPosition = scrollingContainer.scrollLeft;
     const boxWidth = scrollingWrapper.scrollWidth / 4; // Assuming 4 sections in the scrolling box
@@ -37,11 +37,110 @@ document.addEventListener("DOMContentLoaded", () => {
     if (scrollPosition >= totalScrollWidth - scrollingContainer.offsetWidth) {
       scrollingContainer.scrollLeft = scrollPosition - totalScrollWidth + boxWidth;
     } else if (scrollPosition < 0) {
-      scrollingContainer.scrollLeft = scrollPosition + totalScrollWidth;// - boxWidth;
+      scrollingContainer.scrollLeft = scrollPosition + totalScrollWidth - boxWidth;
     }
+//
 //test infinite scroll right
+  const scrollToCenter = () => {
+    const boxWidth = scrollingContainer.offsetWitdth;
+    const containerWidth = window.innerWidth;
+    const scrollOffset = (boxWidth - containerWidth) / 2;
+    scrollingContainer.scrollLeft = scrollOffset;
+  };
 
-  });
-scrollingContainer.scrollLeft = scrollingWrapper.scrollWidth;
+  // Call the scroll to center function when the page loads
+  scrollToCenter();
+
+  // Listen for window resize event to reposition the box
+  window.addEventListener("resize", scrollToCenter);
+ // });
 });
+*/
+
+
+
+
+// Array of messages to display
+const messages = ["Message 1", "Message 2", "Message 3"];
+
+// Function to display alternating fading messages
+function displayMessages() {
+  const messageContainer = document.querySelector(".gallery--message-container");
+  let index = 0;
+
+  function showMessage() {
+    const messageText = messageContainer.querySelectorAll(".gallery--message-text");
+    messageText.forEach((element, i) => {
+      element.style.display = i === index ? "block" : "none";
+    });
+
+    index = (index + 1) % messages.length;
+  }
+
+  setInterval(showMessage, 5000); // Change message every 3 seconds (adjust as needed)
+}
+
+// Call the function to display messages
+displayMessages();
+
+
+//INTITAL LOAD PAGE TEST***************
+// JavaScript code to handle scrolling and showing the rest of the content
+
+document.addEventListener("DOMContentLoaded", function() {
+  // Get the scroll-down notification element
+  var scrollDownNotification = document.querySelector(".scroll-down-notification");
+
+  // Hide the scroll-down notification on scroll
+  window.addEventListener("scroll", function() {
+    scrollDownNotification.style.opacity = "0";
+  });
+});
+
+
+
+
+
+
+
+//silly test can delete
+document.addEventListener("DOMContentLoaded", () => {
+  const scrollingContainer = document.querySelector(".scrolling-container");
+  const scrollingWrapper = document.querySelector(".scrolling-wrapper");
+
+  const changeHeaderTextPosition = () => {
+    const scrollPosition = scrollingContainer.scrollLeft;
+    const containerWidth = scrollingContainer.offsetWidth;
+    const scrollingBoxes = document.querySelectorAll(".scrolling-box");
+
+    scrollingBoxes.forEach((box) => {
+      const boxOffset = box.offsetLeft - scrollPosition;
+      const textElements = box.querySelectorAll("h2");
+
+      textElements.forEach((text) => {
+        if (boxOffset < 0 && boxOffset + text.offsetWidth > containerWidth) {
+          text.classList.add("slide-opposite");
+        } else {
+          text.classList.remove("slide-opposite");
+        }
+      });
+    });
+  };
+
+  scrollingContainer.addEventListener("scroll", changeHeaderTextPosition);
+
+  // Call the changeHeaderTextPosition function when the page loads
+  changeHeaderTextPosition();
+
+  // Listen for window resize event to update the positions
+  window.addEventListener("resize", changeHeaderTextPosition);
+});
+
+
+
+
+
+
+
+
 

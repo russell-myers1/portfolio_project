@@ -138,7 +138,52 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+/*
+//keydown TEST
+document.addEventListener("DOMContentLoaded", () => {
+  const socialLinks = document.querySelectorAll(".social-links a");
 
+  const handleLinkClick = (event) => {
+    const link = event.currentTarget;
+    const key = link.getAttribute("data-key");
+    simulateKeyPress(key);
+  };
+
+  const simulateKeyPress = (key) => {
+    const event = new KeyboardEvent("keydown", { key });
+    document.dispatchEvent(event);
+  };
+
+  socialLinks.forEach((link) => {
+    link.addEventListener("click", handleLinkClick);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    const key = event.key.toUpperCase();
+    const targetLink = [...socialLinks].find((link) => link.getAttribute("data-key") === key);
+
+    if (targetLink) {
+      targetLink.click();
+    }
+  });
+});
+
+*/
+
+document.addEventListener("DOMContentLoaded", () => {
+  const socialLinks = document.querySelectorAll(".social-links a");
+
+  document.addEventListener("keyup", (event) => {
+    const key = event.key.toLowerCase();
+    
+    // Check if the pressed key corresponds to a social link
+    const matchingLink = Array.from(socialLinks).find((link) => link.dataset.key === key);
+    
+    if (matchingLink) {
+      matchingLink.click();
+    }
+  });
+});
 
 
 
